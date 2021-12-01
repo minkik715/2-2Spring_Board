@@ -8,5 +8,6 @@ public interface ArticleRepository {
     Article save(Article article);
     Article findById(Long id);
     List<Article> findAll();
+    void delete(Article article);
 
 }

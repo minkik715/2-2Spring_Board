@@ -31,4 +31,9 @@ public class MemoryArticleRepository implements ArticleRepository{
     public List<Article> findAll() {
         return new ArrayList<>(store.values());
     }
+
+    @Override
+    public void delete(Article article) {
+        store.remove(article);
+    }
 }

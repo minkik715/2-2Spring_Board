@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <form action="/articles/new" method="post">
+        <div class="form-group">
+            <p>제목</p>
+            <input type="text" id="name" name="name" placeholder="제목을
+입력하세요">
+            <p>글쓰기</p>
+            <textarea name="content" id="content" cols="30" rows="10"></textarea>
+        </div>
+        <button type="submit">작성완료</button>
+    </form>
+</div> <!-- /container -->
+</body>
+</html>

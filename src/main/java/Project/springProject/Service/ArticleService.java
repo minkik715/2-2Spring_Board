@@ -19,17 +19,22 @@ public class ArticleService {
     }
 
     public Long create(Article article) {
-        validate(article); //중복검증
 
         articleRepository.save(article);
         return article.getId();
     }
 
-    private void validate(Article article) {
-        if (article != null) {
-            throw new IllegalStateException("이미 존재하는 글입니다.");
-        }
+    public Article findById(Long l){
+        return articleRepository.findById(l);
     }
+
+    public Article delete(Long l){
+        Article article = articleRepository.findById(l);
+        articleRepository.delete(article);
+        return article;
+    }
+
+
     public List<Article> findArticles(){
         return articleRepository.findAll();
     }
