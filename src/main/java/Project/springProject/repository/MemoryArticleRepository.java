@@ -34,6 +34,6 @@ public class MemoryArticleRepository implements ArticleRepository{
 
     @Override
     public void delete(Article article) {
-        store.remove(article);
+        store.remove(article.getId());
     }
 }

@@ -1,29 +1,17 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<script> function info_chk() {
-    return true;
-}
-
-function info_chk2(frm) {
-    frm.action = 'article/delete';
-    frm.submit();
-    return true;
-} </script>
-
 <div class="container">
-    <form action="/articles/new" method="post">
+    <form action="/articles/update" method="post">
         <div class="form-group">
             <p>제목</p>
             <input type="text" id="name" name="name" th:value="${article.name}">
             <p>글쓰기</p>
             <textarea name="content" id="content" cols="30" rows="10" th:text="${article.content}">
             </textarea>
-            <p th:value="${article.id}쨰 작성 글입니다."></p>
-            <input type="text">
+
         </div>
-        <button type="submit">작성완료</button>
-        <input type='button' value='삭제' onclick='return info_chk2(this.form);'>
+        <button type="submit">수정하기</button>
     </form>
 
 </div> <!-- /container -->

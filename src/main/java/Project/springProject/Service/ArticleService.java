@@ -28,8 +28,7 @@ public class ArticleService {
         return articleRepository.findById(l);
     }
 
-    public Article delete(Long l){
-        Article article = articleRepository.findById(l);
+    public Article delete(Article article){
         articleRepository.delete(article);
         return article;
     }

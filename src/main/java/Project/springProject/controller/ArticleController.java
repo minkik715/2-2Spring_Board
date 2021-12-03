@@ -41,15 +41,41 @@ public class ArticleController {
         return "articles/articleList";
     }
 
-    @GetMapping("article")
-    public String view(Model model){
-        Article article = articleService.findById(1L);
-        model.addAttribute("article",article);
-        return "articles/article";
-    }
-    @PostMapping("article/delete")
-    public String delete(ArticleForm form){
-        Article article =
+    @PostMapping("articles/updatePage")
+    public String updateForm(Model model, ArticleForm articleForm){
+        List<Article> articles = articleService.findArticles();
+        String postContent = articleForm.getContent();
+        for (Article article: articles) {
+            if (article.getContent().equals(postContent)) {
+                model.addAttribute("article", article);
+                articleService.delete(article);
+                break;
+            }
+        }
+        return "articles/updateArticleForm";}
 
+    @PostMapping("articles/update")
+    public String update(Model model, ArticleForm articleForm){
+        Article article = new Article();
+        article.setName(articleForm.getName());
+        article.setContent(articleForm.getContent());
+
+        articleService.create(article);
+
+        return "redirect:/";
+    }
+    @PostMapping("/articles/delete")
+    public String delete(Model model,ArticleForm articleForm){
+        String postContent = articleForm.getContent();
+        List<Article> articles = articleService.findArticles();
+        for (Article article: articles) {
+            if(article.getContent().equals(postContent)){
+                articleService.delete(article);
+                break;
+            }
+        }
+        articles = articleService.findArticles();
+        model.addAttribute("articles", articles);
+        return "articles/articleList";
     }
 }

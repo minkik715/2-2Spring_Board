@@ -114,6 +114,10 @@
         .left {
             text-align: left;
         }
+        .none{
+            display: none;
+        }
+
     </style>
 </head>
 <body>
@@ -141,8 +145,15 @@
 
                         <li th:text="${article.id}"</li>
                         <li th:text="${article.name}"></li>
-                        <li><a href="article" th:text="${article.content}"></a></li>
-                        <li>작성자</li>
+                        <li>
+                            <form action="/articles/updatePage" method="post">
+                                <div class="none"><input type="text" id ="content" name ="content" th:value="${article.content}"></div>
+                                <button type="submit">보기</button>
+                            </form></li>
+                        <li><form action="/articles/delete" method="post">
+                            <div class="none"><input type="text" id ="content" name ="content" th:value="${article.content}"></div>
+                            <button type="submit">삭제하기</button>
+                        </form></li>
                         <li>조회수</li>
                     </ul>
                 </li>
@@ -150,7 +161,7 @@
 
                 <tr>
                     <td colspan="6">
-                        <button><a href="articles/new">글쓰기</a></button>
+                        <button><a href="/articles/new">글쓰기</a></button>
                     </td>
                 </tr>
                 <!-- 게시판 페이징 영역 -->
