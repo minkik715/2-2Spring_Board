@@ -1,6 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        .container{
+            width: 1200px;
+            margin: auto;
+            text-align: center;
+            border: solid black 3px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
 <body>
+<a href="/">나만의 게시판</a>
 <div class="container">
     <form action="/articles/new" method="post">
         <div class="form-group">
@@ -8,10 +20,11 @@
             <input type="text" id="name" name="name" placeholder="제목을
 입력하세요">
             <p>글쓰기</p>
-            <textarea name="content" id="content" cols="30" rows="10"></textarea>
+            <textarea name="content" id="content" cols="60" rows="40"></textarea>
         </div>
         <button type="submit">작성완료</button>
     </form>
 </div> <!-- /container -->
 </body>
+
 </html>

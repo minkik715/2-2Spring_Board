@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="basic.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<title>Food</title>
+
+<style>
+
+
+
+
+    .wrap p {
+        font-size: 15px;
+        padding-top: 30px;
+        padding: 0;
+    }
+
+
+    #wrap2 {
+        width: 1200px;
+        margin: auto;
+    }
+
+
+</style>
+<script>
+    function openClose() {
+        if ($("#postBox").css("display") == "block") {
+            $("#postBox").hide();
+            $("#btn-post-box").text("포스팅 박스 열기");
+        } else {
+            $("#postBox").show();
+            $("#btn-post-box").text("포스팅 박스 닫기");
+        }
+    }
+
+    function dataSend(){
+        let name=$('#name').val();
+        let comment=$('#comment').val();
+        let image = $('#imageUrl').val();
+
+        let foodInfo={
+            name_give : name,
+            comment_give : comment,
+            image_give : image
+        };
+        $.ajax({
+            url: "/addFood",
+            data: foodInfo,
+            type: "POST",
+            success: function (response){
+                alert("저장완료");
+                window.location.reload();
+            }
+        })
+
+    }
+
+</script>
+</head>
+
+<body>
+<a href="/">나만의 게시판</a>
+<div id="wrap2">
+    <div class="posting-box">
+        <div class="jumbotron">
+            <h1 class="display-4"> 나만의 추억 남기기</h1>
+            <p class="lead">과거의 향기는 라일락 꽃밭보다 향기가 진하다.
+                </p>
+            <hr class="my-4">
+            <p class="lead">
+                <a class="mybtn btn btn-primary btn-lg" id="btn-post-box" onclick="openClose()" href="#" role="button">포스팅박스 닫기</a>
+            </p>
+        </div>
+        <form>
+            <div class="urlBox" id="postBox">
+                <div class="form-group">
+                    <label>제목 </label>
+                    <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label >내용</label>
+                    <textarea class="form-control" id="comment"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>이미지 URL </label>
+                    <input type="text" class="form-control" id="imageUrl" aria-describedby="emailHelp">
+                </div>
+                <button onclick="dataSend()" type="submit" class="mybtn2 btn  btn-primary">후기저장</button>
+
+            </div>
+        </form>
+    </div>
+
+    <div class="card-columns"  >
+
+        <div class="card" th:each="food :${foods}">
+            <img class="card-img-top" th:src="${food.image}" alt="Card image cap">
+            <div class="card-body">
+
+                <p class="card-text" th:text="${food.name}"></p>
+                <p class="card-text comment" th:text="${food.comment}"></p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</div>
+</body>
+</html>
